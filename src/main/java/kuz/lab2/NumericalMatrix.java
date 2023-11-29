@@ -1,5 +1,7 @@
 package kuz.lab2;
 
+import java.util.Arrays;
+
 public class NumericalMatrix implements Matrix{
     private final double[][] matrix;
 
@@ -84,5 +86,20 @@ public class NumericalMatrix implements Matrix{
         if (row < 0 || row >= getRowNumbers()) {
             throw new IllegalArgumentException("Invalid row");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        NumericalMatrix that = (NumericalMatrix) o;
+
+        return Arrays.deepEquals(matrix, that.matrix);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(matrix);
     }
 }
