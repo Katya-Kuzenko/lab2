@@ -12,4 +12,8 @@ public class NumericalMatrix implements Matrix{
     public NumericalMatrix(NumericalMatrix numericalMatrix) {
         matrix = new double[numericalMatrix.matrix.length][numericalMatrix.matrix[0].length];
     }
+
+    public void setElement(int row, int column, double el){
+        matrix[row][column] = el;
+    }
 }
