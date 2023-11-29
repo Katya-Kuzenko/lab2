@@ -76,6 +76,20 @@ public class NumericalMatrix implements Matrix{
         return matrix[0].length;
     }
 
+    public NumericalMatrix add(NumericalMatrix matrix) {
+        if (this.getRowNumbers() != matrix.getRowNumbers() || this.getColumnNumbers() != matrix.getColumnNumbers()) {
+            throw new IllegalArgumentException("Size is not the same");
+        }
+
+        NumericalMatrix sumMatrix = new NumericalMatrix(getRowNumbers(), getColumnNumbers());
+        for (int i = 0; i < getRowNumbers(); i++) {
+            for (int j = 0; j < getColumnNumbers(); j++) {
+                sumMatrix.setElement(i, j, this.matrix[i][j] + matrix.matrix[i][j]);
+            }
+        }
+        return sumMatrix;
+    }
+
     private void validateColumn(int column) {
         if (column < 0 || column >= getColumnNumbers()) {
             throw new IllegalArgumentException("Invalid column");

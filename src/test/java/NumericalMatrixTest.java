@@ -50,6 +50,19 @@ public class NumericalMatrixTest {
         assertEquals(9, numericalMatrix.dimension());
     }
 
+    @Test
+    public void testAdd() {
+        NumericalMatrix matrixB = new NumericalMatrix(3, 3);
+        matrixB.setMatrix(new double[][]{{1, 2, 3}, {3, 2, 1}, {7, 4, 8}});
+
+        NumericalMatrix result = numericalMatrix.add(matrixB);
+        for (int i = 0; i < numericalMatrix.getRowNumbers(); i++) {
+            for (int j = 0; j < numericalMatrix.getColumnNumbers(); j++) {
+                assertEquals(numericalMatrix.getElement(i, j) * 2, result.getElement(i, j));
+            }
+        }
+    }
+
 
     @Test
     public void testThrowIllegalArgumentException() {
@@ -61,6 +74,7 @@ public class NumericalMatrixTest {
         assertThrows(IllegalArgumentException.class, () -> numericalMatrix.getElement(1, -1));
         assertThrows(IllegalArgumentException.class, () -> numericalMatrix.setElement(3, 1, 99));
         assertThrows(IllegalArgumentException.class, () -> numericalMatrix.setElement(1, 3, 99));
+        assertThrows(IllegalArgumentException.class, () -> numericalMatrix.add(new NumericalMatrix()));
     }
 
 
