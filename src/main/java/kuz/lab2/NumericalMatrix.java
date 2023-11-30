@@ -154,6 +154,14 @@ public class NumericalMatrix implements Matrix{
         return matrix;
     }
 
+    public static NumericalMatrix randomColumnMatrix(int size) {
+        NumericalMatrix matrix = new NumericalMatrix(size, 1);
+        for (int i = 0; i < matrix.getRowNumbers(); i++) {
+            matrix.setElement(i, 0, Math.random());
+        }
+        return matrix;
+    }
+
     private void validateColumn(int column) {
         if (column < 0 || column >= getColumnNumbers()) {
             throw new IllegalArgumentException("Invalid column");
