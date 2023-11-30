@@ -109,6 +109,15 @@ public class NumericalMatrixTest {
     }
 
     @Test
+    public void testDiagonalMatrix() {
+        NumericalMatrix matrix = NumericalMatrix.diagonalMatrix(new double[]{1, 2, 3, 4});
+        assertEquals(1, matrix.getElement(0, 0));
+        assertEquals(2, matrix.getElement(1, 1));
+        assertEquals(3, matrix.getElement(2, 2));
+        assertEquals(4, matrix.getElement(3, 3));
+    }
+
+    @Test
     public void testThrowIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> numericalMatrix.getColumn(-1));
         assertThrows(IllegalArgumentException.class, () -> numericalMatrix.getColumn(3));

@@ -128,6 +128,19 @@ public class NumericalMatrix implements Matrix{
         return result;
     }
 
+    public static NumericalMatrix diagonalMatrix(double[] diagonal) {
+        NumericalMatrix matrix = new NumericalMatrix(diagonal.length, diagonal.length);
+        for (int i = 0; i < matrix.getRowNumbers(); i++) {
+            for (int j = 0; j < matrix.getColumnNumbers(); j++) {
+                if (i == j) {
+                    matrix.setElement(i, j, diagonal[i]);
+                }
+            }
+        }
+        return matrix;
+    }
+
+
     private void validateColumn(int column) {
         if (column < 0 || column >= getColumnNumbers()) {
             throw new IllegalArgumentException("Invalid column");
