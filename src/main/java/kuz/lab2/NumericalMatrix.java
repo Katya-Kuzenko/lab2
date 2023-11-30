@@ -146,6 +146,14 @@ public class NumericalMatrix implements Matrix{
         return diagonalMatrix(diagonal);
     }
 
+    public static NumericalMatrix randomRowMatrix(int size) {
+        NumericalMatrix matrix = new NumericalMatrix(1, size);
+        for (int i = 0; i < matrix.getColumnNumbers(); i++) {
+            matrix.setElement(0, i, Math.random());
+        }
+        return matrix;
+    }
+
     private void validateColumn(int column) {
         if (column < 0 || column >= getColumnNumbers()) {
             throw new IllegalArgumentException("Invalid column");
