@@ -118,6 +118,16 @@ public class NumericalMatrix implements Matrix{
         return result;
     }
 
+    public NumericalMatrix transpose() {
+        NumericalMatrix result = new NumericalMatrix(getColumnNumbers(), getRowNumbers());
+        for (int i = 0; i < result.getRowNumbers(); i++) {
+            for (int j = 0; j < result.getColumnNumbers(); j++) {
+                result.setElement(i, j, matrix[j][i]);
+            }
+        }
+        return result;
+    }
+
     private void validateColumn(int column) {
         if (column < 0 || column >= getColumnNumbers()) {
             throw new IllegalArgumentException("Invalid column");

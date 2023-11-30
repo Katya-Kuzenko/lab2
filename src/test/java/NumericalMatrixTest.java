@@ -92,6 +92,23 @@ public class NumericalMatrixTest {
     }
 
     @Test
+    public void testMatrixTranspose() {
+        NumericalMatrix matrixA = new NumericalMatrix(3, 2);
+        matrixA.setMatrix(new double[][]{{1, 2}, {3, 4}, {5, 6}});
+
+        NumericalMatrix result = matrixA.transpose();
+        assertEquals(2, result.getRowNumbers());
+        assertEquals(3, result.getColumnNumbers());
+
+        assertEquals(1, result.getElement(0, 0));
+        assertEquals(3, result.getElement(0, 1));
+        assertEquals(5, result.getElement(0, 2));
+        assertEquals(2, result.getElement(1, 0));
+        assertEquals(4, result.getElement(1, 1));
+        assertEquals(6, result.getElement(1, 2));
+    }
+
+    @Test
     public void testThrowIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> numericalMatrix.getColumn(-1));
         assertThrows(IllegalArgumentException.class, () -> numericalMatrix.getColumn(3));
