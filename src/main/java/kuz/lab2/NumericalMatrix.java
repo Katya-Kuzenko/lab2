@@ -14,6 +14,11 @@ public class NumericalMatrix implements Matrix{
         }
         matrix = new double[m][n];
     }
+
+    public NumericalMatrix(double[][] matrix) {
+        this.matrix = matrix;
+    }
+
     public NumericalMatrix(NumericalMatrix numericalMatrix) {
         matrix = new double[numericalMatrix.getRowNumbers()][numericalMatrix.getColumnNumbers()];
         for (int i = 0; i < getRowNumbers(); i++){
@@ -162,6 +167,57 @@ public class NumericalMatrix implements Matrix{
         return matrix;
     }
 
+    public NumericalMatrix invertibleMatrix() {
+        double determinant = determinant();
+        if (determinant == 0) {
+            throw new IllegalArgumentException("Matrix is singular");
+        }
+        NumericalMatrix adjugateMatrix = adjugateMatrix();
+        return adjugateMatrix.multiply(1 / determinant);
+    }
+
+    private NumericalMatrix adjugateMatrix() {
+        int n = matrix.length;
+        double[][] adjugateMatrix = new double[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                adjugateMatrix[j][i] = Math.pow(-1, i + j) * removeRowAndColumn(i, j).determinant();
+            }
+        }
+        return new NumericalMatrix(adjugateMatrix);
+    }
+
+    public double determinant() {
+        validateSquareMatrix();
+        if (matrix.length == 1) {
+            return matrix[0][0];
+        }
+        double determine = 0;
+        for (int k = 0; k < matrix.length; k++) {
+            determine = determine + Math.pow(-1, k) * matrix[0][k] * removeRowAndColumn(0, k).determinant();
+        }
+        return determine;
+    }
+
+    private NumericalMatrix removeRowAndColumn(int row, int column) {
+        int n = this.matrix.length - 1;
+        double[][] newMatrix = new double[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int rowPointer = i;
+                if (i >= row) {
+                    rowPointer++;
+                }
+                int columnPointer = j;
+                if (j >= column) {
+                    columnPointer++;
+                }
+                newMatrix[i][j] = matrix[rowPointer][columnPointer];
+            }
+        }
+        return new NumericalMatrix(newMatrix);
+    }
+
     private void validateColumn(int column) {
         if (column < 0 || column >= getColumnNumbers()) {
             throw new IllegalArgumentException("Invalid column");
@@ -171,6 +227,12 @@ public class NumericalMatrix implements Matrix{
     private void validateRow(int row) {
         if (row < 0 || row >= getRowNumbers()) {
             throw new IllegalArgumentException("Invalid row");
+        }
+    }
+
+    private void validateSquareMatrix() {
+        if (getRowNumbers() != getColumnNumbers()) {
+            throw new IllegalArgumentException("Columns and rows number not equal");
         }
     }
 

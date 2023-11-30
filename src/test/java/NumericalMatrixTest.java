@@ -13,8 +13,7 @@ public class NumericalMatrixTest {
             3 2 1
             7 4 8
          */
-        numericalMatrix = new NumericalMatrix(3, 3);
-        numericalMatrix.setMatrix(new double[][]{{1, 2, 3}, {3, 2, 1}, {7, 4, 8}});
+        numericalMatrix = new NumericalMatrix(new double[][]{{1, 2, 3}, {3, 2, 1}, {7, 4, 8}});
     }
 
     @Test
@@ -122,6 +121,27 @@ public class NumericalMatrixTest {
         NumericalMatrix matrix = NumericalMatrix.identityMatrix(2);
         assertEquals(1, matrix.getElement(0, 0));
         assertEquals(1, matrix.getElement(1, 1));
+    }
+
+    @Test
+    public void testDetermineMatrix() {
+        double determinant = numericalMatrix.determinant();
+        assertEquals(-28, determinant);
+    }
+
+    @Test
+    public void testInvertibleMatrix() {
+        NumericalMatrix matrix = new NumericalMatrix(new double[][]{{1, 3, -5}, {0, 1, 2}, {0, 0, 1}});
+        NumericalMatrix result = matrix.invertibleMatrix();
+        assertEquals(1, result.getElement(0, 0));
+        assertEquals(-3, result.getElement(0, 1));
+        assertEquals(11, result.getElement(0, 2));
+        assertEquals(-0.0, result.getElement(1, 0));
+        assertEquals(1, result.getElement(1, 1));
+        assertEquals(-2, result.getElement(1, 2));
+        assertEquals(0, result.getElement(2, 0));
+        assertEquals(-0.0, result.getElement(2, 1));
+        assertEquals(1, result.getElement(2, 2));
     }
 
     @Test
