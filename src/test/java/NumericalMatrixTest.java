@@ -118,6 +118,13 @@ public class NumericalMatrixTest {
     }
 
     @Test
+    public void testIdentityMatrix() {
+        NumericalMatrix matrix = NumericalMatrix.identityMatrix(2);
+        assertEquals(1, matrix.getElement(0, 0));
+        assertEquals(1, matrix.getElement(1, 1));
+    }
+
+    @Test
     public void testThrowIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> numericalMatrix.getColumn(-1));
         assertThrows(IllegalArgumentException.class, () -> numericalMatrix.getColumn(3));

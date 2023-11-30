@@ -140,6 +140,11 @@ public class NumericalMatrix implements Matrix{
         return matrix;
     }
 
+    public static NumericalMatrix identityMatrix(int size) {
+        double[] diagonal = new double[size];
+        Arrays.fill(diagonal, 1);
+        return diagonalMatrix(diagonal);
+    }
 
     private void validateColumn(int column) {
         if (column < 0 || column >= getColumnNumbers()) {
