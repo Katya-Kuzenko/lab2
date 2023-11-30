@@ -100,6 +100,24 @@ public class NumericalMatrix implements Matrix{
         return newMatrix;
     }
 
+    public NumericalMatrix multiply(NumericalMatrix otherMatrix) {
+        if (getColumnNumbers() != otherMatrix.getRowNumbers()) {
+            throw new IllegalArgumentException("Columns and rows number not equal");
+        }
+
+        NumericalMatrix result = new NumericalMatrix(getRowNumbers(), otherMatrix.getColumnNumbers());
+        for (int i = 0; i < result.getRowNumbers(); i++) {
+            for (int j = 0; j < result.getColumnNumbers(); j++) {
+                double resultEl = 0;
+                for (int r = 0; r < getColumnNumbers(); r++) {
+                    resultEl = resultEl + matrix[i][r] * otherMatrix.matrix[r][j];
+                }
+                result.setElement(i, j, resultEl);
+            }
+        }
+        return result;
+    }
+
     private void validateColumn(int column) {
         if (column < 0 || column >= getColumnNumbers()) {
             throw new IllegalArgumentException("Invalid column");
