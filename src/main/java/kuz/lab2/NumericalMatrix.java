@@ -90,6 +90,16 @@ public class NumericalMatrix implements Matrix{
         return sumMatrix;
     }
 
+    public NumericalMatrix multiply(double scalar) {
+        NumericalMatrix newMatrix = new NumericalMatrix(getRowNumbers(), getColumnNumbers());
+        for (int i = 0; i < getRowNumbers(); i++) {
+            for (int j = 0; j < getColumnNumbers(); j++) {
+                newMatrix.setElement(i, j, scalar * matrix[i][j]);
+            }
+        }
+        return newMatrix;
+    }
+
     private void validateColumn(int column) {
         if (column < 0 || column >= getColumnNumbers()) {
             throw new IllegalArgumentException("Invalid column");

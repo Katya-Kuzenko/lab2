@@ -63,6 +63,16 @@ public class NumericalMatrixTest {
         }
     }
 
+    @Test
+    public void testScalarMultiply() {
+        NumericalMatrix result = numericalMatrix.multiply(3);
+        for (int i = 0; i < numericalMatrix.getRowNumbers(); i++) {
+            for (int j = 0; j < numericalMatrix.getColumnNumbers(); j++) {
+                assertEquals(numericalMatrix.getElement(i, j) * 3, result.getElement(i, j));
+            }
+        }
+    }
+
 
     @Test
     public void testThrowIllegalArgumentException() {
